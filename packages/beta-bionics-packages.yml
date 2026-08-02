@@ -1,0 +1,60 @@
+generated: '2026-08-02'
+method: searched
+source: >-
+  npm registry search, PyPI, GitHub (github.com/Betabionics), Apple App Store
+  search API, Google Play
+note: >-
+  Beta Bionics ships NO client libraries or SDKs in any public package registry —
+  npm, PyPI, Maven Central, NuGet, pkg.go.dev, RubyGems, Packagist and crates.io
+  all return no first-party package. The only GitHub identity found
+  (github.com/Betabionics, a personal user account, not an organization) has zero
+  public repositories. What the company does publish are two first-party consumer
+  mobile applications; they are recorded below as distribution artifacts, NOT as
+  SDKs, so no `SDKs` pointer is wired in apis.yml.
+packages: []
+mobile_apps:
+- name: iLet App
+  vendor: Beta Bionics Inc.
+  platform: ios
+  registry: app-store
+  id: '1553486890'
+  version: 3.1.1
+  url: https://apps.apple.com/us/app/ilet-app/id1553486890
+  official: true
+  description: >-
+    Companion app for the iLet Bionic Pancreas — displays current glucose, trend
+    and notifications from the pump in real time, syncs device data to the Beta
+    Bionics cloud, delivers iLet software updates, and shares data with the user's
+    healthcare provider.
+- name: iLet App
+  vendor: Beta Bionics Inc.
+  platform: android
+  registry: google-play
+  id: com.betabionics.ilet
+  url: https://play.google.com/store/apps/details?id=com.betabionics.ilet
+  official: true
+- name: Bionic Circle
+  vendor: Beta Bionics Inc.
+  platform: ios
+  registry: app-store
+  id: '6477549955'
+  version: 1.2.0
+  url: https://apps.apple.com/us/app/bionic-circle/id6477549955
+  official: true
+  description: >-
+    Follower app. An iLet user can invite up to 10 friends, family or caregivers
+    to remotely view CGM values, meal announcements and insulin doses and to
+    receive Urgent Low / Urgent / Low Soon / Low / High / No Data alerts.
+- name: Bionic Circle
+  vendor: Beta Bionics Inc.
+  platform: android
+  registry: google-play
+  id: com.betabionics.circle
+  url: https://play.google.com/store/apps/details?id=com.betabionics.circle
+  official: true
+registries_checked:
+- {registry: npm, query: betabionics, results: 0}
+- {registry: pypi, query: betabionics, results: 0, http_status: 404}
+- {registry: github, query: 'orgs/betabionics', http_status: 404}
+- {registry: github, query: 'orgs/beta-bionics', http_status: 404}
+- {registry: github, query: 'users/Betabionics/repos', results: 0}

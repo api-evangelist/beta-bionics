@@ -1,0 +1,57 @@
+generated: '2026-08-02'
+method: probed
+source: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_HNbbVuwO8/.well-known/openid-configuration
+note: >-
+  Derived from a live OIDC discovery fetch, not from an OpenAPI document — Beta
+  Bionics publishes no OpenAPI/Swagger and no developer authentication guide. The
+  Bionic Portal and the iLet / Bionic Circle mobile apps authenticate against an
+  Amazon Cognito user pool via AWS Amplify Auth; the resulting Cognito JWT is
+  presented to the Amazon API Gateway deployment at us-main-prod.betabionicsapi.com.
+  There is no self-service developer registration, no API keys, and no documented
+  third-party access path. Access is provisioned to patients, caregivers (Bionic
+  Circle followers) and clinic staff through the product, and is subject to HIPAA.
+summary:
+  types: [openIdConnect, oauth2]
+  api_key_in: []
+  oauth2_flows: [authorizationCode, implicit]
+  public_developer_signup: false
+  human_in_the_loop: true
+schemes:
+- name: CognitoUserPool
+  type: openIdConnect
+  openIdConnectUrl: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_HNbbVuwO8/.well-known/openid-configuration
+  issuer: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_HNbbVuwO8
+  provider: Amazon Cognito
+  user_pool_id: us-east-2_HNbbVuwO8
+  region: us-east-2
+  jwks_uri: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_HNbbVuwO8/.well-known/jwks.json
+  id_token_signing_alg_values_supported: [RS256]
+  subject_types_supported: [public]
+  sources: [well-known/beta-bionics-openid-configuration.json]
+- name: CognitoHostedUI
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://us-east-2hnbbvuwo8.auth.us-east-2.amazoncognito.com/oauth2/authorize
+    tokenUrl: https://us-east-2hnbbvuwo8.auth.us-east-2.amazoncognito.com/oauth2/token
+    scopes: [openid, email, phone, profile]
+  - flow: implicit
+    authorizationUrl: https://us-east-2hnbbvuwo8.auth.us-east-2.amazoncognito.com/oauth2/authorize
+    scopes: [openid, email, phone, profile]
+  revocation_endpoint: https://us-east-2hnbbvuwo8.auth.us-east-2.amazoncognito.com/oauth2/revoke
+  userinfo_endpoint: https://us-east-2hnbbvuwo8.auth.us-east-2.amazoncognito.com/oauth2/userInfo
+  end_session_endpoint: https://us-east-2hnbbvuwo8.auth.us-east-2.amazoncognito.com/logout
+  token_endpoint_auth_methods_supported: [client_secret_basic, client_secret_post]
+  response_types_supported: [code, token]
+  sources: [well-known/beta-bionics-openid-configuration.json]
+mfa:
+  supported: true
+  evidence: >-
+    The Bionic Portal client exposes account MFA controls
+    (/v1/account/checkAccountSecurity, /v1/account/toggleMfa) and the Amplify
+    Cognito config carries an mfa block.
+  source: https://portal.betabionics.com/main-QC35MYJM.js
+x-evidence:
+- {fetched: '2026-08-02', url: 'https://cognito-idp.us-east-2.amazonaws.com/us-east-2_HNbbVuwO8/.well-known/openid-configuration', http_status: 200, content_type: application/json}
+- {fetched: '2026-08-02', url: 'https://cognito-idp.us-east-2.amazonaws.com/us-east-2_HNbbVuwO8/.well-known/jwks.json', http_status: 200}
+- {fetched: '2026-08-02', url: 'https://us-main-prod.betabionicsapi.com/', http_status: 403, body: '{"message":"Missing Authentication Token"}'}

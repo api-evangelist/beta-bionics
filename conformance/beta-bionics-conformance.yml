@@ -1,0 +1,87 @@
+generated: '2026-08-02'
+method: searched
+source: >-
+  https://www.betabionics.com/privacy/ ,
+  https://cognito-idp.us-east-2.amazonaws.com/us-east-2_HNbbVuwO8/.well-known/openid-configuration ,
+  https://www.fda.gov/news-events/press-announcements/fda-clears-new-insulin-pump-and-algorithm-based-software-support-enhanced-automatic-insulin-delivery
+note: >-
+  Beta Bionics is a regulated medical device manufacturer, not an API provider.
+  Its conformance posture is therefore regulatory (FDA device clearance, HIPAA)
+  rather than API-standards conformance. It publishes no OpenAPI, no error format,
+  no pagination or idempotency contract, and no API governance rules, so every
+  API-standards row below is honestly recorded as false rather than unknown.
+standards:
+- id: hipaa
+  conforms: true
+  evidence: >-
+    The published privacy policy is explicitly the company's HIPAA Notice of
+    Privacy Practices: "THIS PRIVACY POLICY CONSTITUTES OUR HIPAA NOTICE OF
+    PRIVACY PRACTICES AND DESCRIBES HOW WE COLLECT, USE, SAFEGUARD AND DISCLOSE
+    PHI THAT IS SUBJECT TO HIPAA." Effective April 3, 2024.
+  url: https://www.betabionics.com/privacy/
+- id: fda-510k
+  conforms: true
+  evidence: >-
+    iLet ACE Pump and iLet Dosing Decision Software cleared by FDA on 2023-05-19
+    under 510(k) K223846; the pump is regulated as an Alternate Controller Enabled
+    (ACE) insulin infusion pump, product code QFG. Related clearances include
+    K220916, K231485, K232224.
+  url: https://www.fda.gov/news-events/press-announcements/fda-clears-new-insulin-pump-and-algorithm-based-software-support-enhanced-automatic-insulin-delivery
+- id: oidc
+  conforms: true
+  evidence: >-
+    Amazon Cognito user pool us-east-2_HNbbVuwO8 serves a valid OpenID Connect
+    discovery document (RS256 ID tokens, standard openid/email/phone/profile
+    scopes) at cognito-idp.us-east-2.amazonaws.com.
+  url: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_HNbbVuwO8/.well-known/openid-configuration
+- id: oauth2
+  conforms: true
+  evidence: >-
+    Cognito Hosted UI exposes RFC 6749 authorization_code and implicit flows plus
+    an RFC 7009 revocation endpoint. Gated to product users; no developer client
+    registration is offered.
+  url: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_HNbbVuwO8/.well-known/openid-configuration
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every Beta Bionics host.
+- id: rfc8414-oauth-metadata
+  conforms: false
+  evidence: No /.well-known/oauth-authorization-server on any betabionics.com or betabionicsapi.com host.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI/Swagger found on the API hosts, the portal host, the docs host or
+    any public repository. See well-known/beta-bionics-well-known.yml for the
+    full probe record.
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming or webhook surface is published.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'No public error contract; API Gateway returns bare {"message": "..."} envelopes.'
+- id: fhir-r4
+  conforms: false
+  evidence: >-
+    No FHIR interface published. Device data is shared with clinicians via the
+    Bionic Portal and via uploads to Glooko, not via a FHIR API.
+- id: mcp
+  conforms: false
+  evidence: No Model Context Protocol server published.
+- id: a2a
+  conforms: false
+  evidence: >-
+    No agent card at /.well-known/agent-card.json or /.well-known/agent.json on
+    any host. report.betabionics.com 200s were SPA catch-alls and were rejected.
+regulatory:
+  regime: US FDA medical device (Class II) + HIPAA
+  open_actions:
+  - type: FDA Warning Letter
+    id: MARCS-CMS 717927
+    date: '2026-01-28'
+    summary: >-
+      FDA issued a Warning Letter following a June 9-26, 2025 inspection of the
+      Irvine, CA facility, citing quality-system and medical device reporting
+      violations (complaint investigation documentation, CAPA records for pump
+      display damage, and unfiled Reports of Correction and Removal).
+    url: https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/warning-letters/beta-bionics-inc-717927-01282026
+certifications_published: []

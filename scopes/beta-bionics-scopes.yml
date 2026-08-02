@@ -1,0 +1,36 @@
+generated: '2026-08-02'
+method: probed
+source: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_HNbbVuwO8/.well-known/openid-configuration
+note: >-
+  Beta Bionics publishes no scope or permission reference — there is no developer
+  program. The only scopes observable are the four standard OIDC scopes advertised
+  by the Amazon Cognito user pool that fronts the Bionic Portal and the iLet /
+  Bionic Circle mobile apps. No custom resource-server scopes are advertised
+  anonymously; any that exist would require authenticated introspection of the
+  Cognito user pool, which is not public.
+schemes:
+- name: CognitoHostedUI
+  source: well-known/beta-bionics-openid-configuration.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://us-east-2hnbbvuwo8.auth.us-east-2.amazoncognito.com/oauth2/authorize
+    tokenUrl: https://us-east-2hnbbvuwo8.auth.us-east-2.amazoncognito.com/oauth2/token
+scopes:
+- scope: openid
+  description: OpenID Connect authentication; issues an ID token identifying the user.
+  flows: [authorizationCode, implicit]
+  sources: [well-known/beta-bionics-openid-configuration.json]
+- scope: email
+  description: Access to the user's email address and email_verified claim.
+  flows: [authorizationCode, implicit]
+  sources: [well-known/beta-bionics-openid-configuration.json]
+- scope: phone
+  description: Access to the user's phone_number and phone_number_verified claims.
+  flows: [authorizationCode, implicit]
+  sources: [well-known/beta-bionics-openid-configuration.json]
+- scope: profile
+  description: Access to the user's basic profile claims.
+  flows: [authorizationCode, implicit]
+  sources: [well-known/beta-bionics-openid-configuration.json]
+custom_scopes: []
+docs: null

@@ -1,0 +1,67 @@
+generated: '2026-08-02'
+method: probed
+source: live GET of /.well-known/* on every Beta Bionics host in apis.yml
+note: >-
+  Beta Bionics publishes nothing under /.well-known/ on any of its own hosts. The
+  marketing site (WordPress) returns a 404 HTML page for every path; the Bionic
+  Portal API host (Amazon API Gateway) returns 403 "Missing Authentication Token"
+  for every path including /.well-known/*; report.betabionics.com is a
+  single-page-app catch-all that answers 200 with the same 148KB HTML shell for
+  every path, so all of its 200s are FALSE POSITIVES and were rejected. The one
+  real discovery document in this profile is the OIDC configuration for the Amazon
+  Cognito user pool that fronts the portal and mobile apps (user pool
+  us-east-2_HNbbVuwO8, discovered in the Bionic Portal Angular bundle) — it is
+  served by AWS on Beta Bionics' behalf, not from a betabionics.com host.
+hosts:
+- host: https://www.betabionics.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://us-main-prod.betabionicsapi.com
+  note: Amazon API Gateway — 403 "Missing Authentication Token" on every path
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/agent-card.json, status: 403}
+  - {path: /.well-known/agent.json, status: 403}
+- host: https://us-apps.betabionicsapi.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://us-users.betabionicsapi.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://report.betabionics.com
+  note: >-
+    SPA catch-all — returned HTTP 200 with an identical 148,749-byte HTML document
+    for /openapi.json, /swagger.json, /api-docs, /.well-known/agent-card.json and
+    every other probed path. All 200s rejected as false positives per the pipeline
+    contract; no artifact recorded.
+  documents:
+  - {path: /.well-known/agent-card.json, status: 200, rejected: true, reason: html-spa-catchall}
+  - {path: /.well-known/agent.json, status: 200, rejected: true, reason: html-spa-catchall}
+- host: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_HNbbVuwO8
+  note: >-
+    Amazon Cognito user pool used by the Bionic Portal and the iLet / Bionic Circle
+    mobile apps. Discovered in https://portal.betabionics.com/main-QC35MYJM.js.
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: beta-bionics-openid-configuration.json
+  - path: /.well-known/jwks.json
+    status: 200
+    content_type: application/json
+security_txt: null
+api_catalog: null
