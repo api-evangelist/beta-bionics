@@ -14,6 +14,17 @@ description: 'Beta Bionics, Inc. (Nasdaq: BBNX) is a commercial-stage medical te
   dashboard. There is no public developer program, no published API documentation and
   no machine-readable API contract: the cloud APIs behind the portal and mobile apps
   are private, HIPAA-regulated, and gated behind Amazon Cognito.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.betabionics.com/wp-content/uploads/logo-white.svg
 url: https://raw.githubusercontent.com/api-evangelist/beta-bionics/refs/heads/main/apis.yml
 x-type: company
