@@ -64,45 +64,95 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Beta Bionics, Inc. (Nasdaq: BBNX) is a commercial-stage medical technology company that designs,
-develops and commercializes the **iLet Bionic Pancreas** — an FDA-cleared automated insulin delivery
-system made up of the iLet ACE Pump and the iLet Dosing Decision Software, paired with a Dexcom or
-Abbott FreeStyle Libre 3 Plus continuous glucose monitor. The iLet initializes on body weight alone
-and determines 100% of insulin doses without carb counting, correction factors or preset basal rates.
+Beta Bionics, Inc. (Nasdaq: BBNX) is a commercial-stage medical technology company in Irvine, California and Boston, Massachusetts that designs, develops and commercializes the iLet Bionic Pancreas — an FDA-cleared automated insulin delivery system made up of the iLet ACE Pump and the iLet Dosing Decision Software, paired with a Dexcom G6/G7 or Abbott FreeStyle Libre 3 Plus continuous glucose monitor. The iLet initializes on body weight alone and determines 100% of insulin doses without carb counting, correction factors or preset basal rates. Device data flows from the pump to the iLet mobile app and on to the Beta Bionics cloud, where it feeds the Bionic Circle follower app (up to 10 caregivers), clinician reporting in the Bionic (HCP) Portal, and uploads to Glooko for remote patient monitoring. Beta Bionics publishes near-real-time real-world outcomes for its whole connected population on a public dashboard. There is no public developer program, no published API documentation and no machine-readable API contract: the cloud APIs behind the portal and mobile apps are private, HIPAA-regulated, and gated behind Amazon Cognito.
 
-- https://www.betabionics.com/
+**Areas:** Company · Health · Healthcare · Medical Devices · Diabetes · Automated Insulin Delivery · Digital Health · Remote Patient Monitoring · HIPAA · Connected Devices
 
-## API posture
+## Beta Bionics on APIs.io
 
-Beta Bionics is a regulated medical device manufacturer, **not an API provider**. There is no
-developer program, no API documentation, no self-service registration, and no machine-readable
-contract of any kind — no OpenAPI, AsyncAPI, GraphQL, protobuf, webhooks, MCP server or A2A agent
-card. The 2026-08-02 enrichment pass probed every host in this profile and recorded the result.
+Everything profiled for Beta Bionics is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/beta-bionics/](https://apis.io/providers/beta-bionics/)** — or go straight to one of the APIs or properties below.
 
-What does exist is a **private, HIPAA-regulated cloud API** behind the clinician portal and the
-iLet / Bionic Circle mobile apps:
+### APIs (1)
 
-| Surface | Host | Anonymous result |
-|---|---|---|
-| Bionic Portal API | `https://us-main-prod.betabionicsapi.com` | `403 {"message":"Missing Authentication Token"}` (Amazon API Gateway) |
-| App API | `https://us-apps.betabionicsapi.com` | 404 |
-| Users API | `https://us-users.betabionicsapi.com` | 404 |
-| Bionic (HCP) Portal | `https://portal.betabionics.com/` | 200, Angular SPA |
-| Identity | Amazon Cognito user pool `us-east-2_HNbbVuwO8` | OIDC discovery 200 |
+- [Beta Bionics Bionic Portal API](https://apis.io/apis/beta-bionics/hcp-portal-api/) — The private cloud API behind the Beta Bionics Bionic (HCP) Portal and the iLet / Bionic Circle mobile apps. Observed as an Amazon API Gateway deployment at…
 
-## Artifacts
+### Published properties
 
-| Artifact | File | Method |
-|---|---|---|
-| Authentication | `authentication/beta-bionics-authentication.yml` | probed |
-| OAuth scopes | `scopes/beta-bionics-scopes.yml` | probed |
-| Well-known | `well-known/beta-bionics-well-known.yml` + `beta-bionics-openid-configuration.json` | probed |
-| Conformance | `conformance/beta-bionics-conformance.yml` | searched |
-| Domain security | `security/beta-bionics-domain-security.yml` | probed |
-| Packages | `packages/beta-bionics-packages.yml` | searched |
-| llms.txt | `llms/beta-bionics-llms.txt` | generated |
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Deliberately **not** written, because the provider publishes nothing to record: `openapi/`,
-`asyncapi/`, `mcp/`, `a2a/`, `skills/`, `overlays/`, `grpc/`, `errors/`, `lifecycle/`, `changelog/`,
-`cli/`, `components/`, `sandbox/`, `data-model/`, and the vulnerability-disclosure / trust-center
-files (both probes returned no hit).
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Beta Bionics Authentication](https://apis.io/security/beta-bionics/beta-bionics-authentication/)
+- [Beta Bionics Domain Security](https://apis.io/security/beta-bionics/beta-bionics-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Beta Bionics Scopes](https://apis.io/scopes/beta-bionics/beta-bionics-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.betabionics.com/)
+- [Support](https://www.betabionics.com/support/)
+- [Blog](https://www.betabionics.com/articles/)
+- [Compliance](https://www.betabionics.com/privacy/)
+- [Terms of service](https://www.betabionics.com/terms/)
+- [Privacy policy](https://www.betabionics.com/privacy/)
+
+## API Evangelist rating
+
+**Kin Score 22.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 28.9 |
+
+**Agent readiness 6.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 36.7** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/beta-bionics/](https://apis.io/providers/beta-bionics/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Beta Bionics: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/beta-bionics/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
